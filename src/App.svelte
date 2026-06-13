@@ -14,6 +14,7 @@
   import Todo from "./lib/Todo.svelte";
   import Notes from "./lib/Notes.svelte";
   import Pomodoro from "./lib/Pomodoro.svelte";
+  import CommandPalette from "./lib/CommandPalette.svelte";
 
   let config = $state<NeoDeckConfig>(defaultConfig);
 
@@ -44,13 +45,25 @@
   });
 
   function cycleTheme() {
-    const i = THEMES.indexOf(theme);
-    theme = THEMES[(i + 1) % THEMES.length];
-    localStorage.setItem("neodeck-theme", theme);
+    setTheme(THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]);
+  }
+
+  function setTheme(t: ThemeName) {
+    theme = t;
+    localStorage.setItem("neodeck-theme", t);
+  }
+
+  // matrix-rain background (toggleable from the command palette)
+  let matrixOn = $state(defaultConfig.matrixRain);
+  $effect(() => {
+    matrixOn = config.matrixRain;
+  });
+  function toggleMatrix() {
+    matrixOn = !matrixOn;
   }
 </script>
 
-{#if config.matrixRain}
+{#if matrixOn}
   <MatrixBg />
 {/if}
 
@@ -110,10 +123,13 @@
   {/if}
 
   <footer>
-    NeoDeck · edit <code>neodeck.config.json</code> to make it yours ·
+    NeoDeck · press <kbd>Ctrl</kbd>+<kbd>K</kbd> for commands · edit
+    <code>neodeck.config.json</code> to make it yours ·
     <a href="https://github.com/DaddyYarik" target="_blank" rel="noopener">github</a>
   </footer>
 </div>
+
+<CommandPalette {config} {theme} {setTheme} {toggleMatrix} />
 
 <style>
   .deck {
@@ -214,5 +230,14 @@
   }
   footer a {
     color: var(--accent);
+  }
+  footer kbd {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    background: var(--panel-solid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--fg);
   }
 </style>
