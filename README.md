@@ -5,7 +5,7 @@
 
 **[🌐 Live demo →](https://daddyyarik.github.io/neodeck/)**
 
-![NeoDeck dashboard](docs/screenshot.png)
+![NeoDeck demo](docs/demo.gif)
 
 NeoDeck is a single static site: drop a `neodeck.config.json` next to it and the
 whole dashboard reshapes itself — no rebuild, no backend. Built with Svelte +
@@ -75,6 +75,31 @@ Push to `main` — the included workflow (`.github/workflows/deploy.yml`) builds
 and publishes to Pages. Enable it under **Settings → Pages → Build and
 deployment → GitHub Actions**.
 
+### Docker (self-host)
+
+```bash
+docker compose up -d        # build + run, then open http://localhost:8080
+```
+
+Or without compose:
+
+```bash
+docker build -t neodeck .
+docker run -d -p 8080:80 --name neodeck neodeck
+```
+
+To use your own config without rebuilding the image, mount it over the one in
+the container:
+
+```bash
+docker run -d -p 8080:80 \
+  -v "$(pwd)/neodeck.config.json:/usr/share/nginx/html/neodeck.config.json:ro" \
+  neodeck
+```
+
+(or uncomment the `volumes:` block in `docker-compose.yml`). The image is a tiny
+multi-stage build — Node compiles the site, nginx serves the static `dist/`.
+
 ### Anywhere static
 
 `npm run build` produces a `dist/` folder of plain static files. Serve it with
@@ -86,8 +111,8 @@ from a subfolder too.
 - [ ] Command palette (`Ctrl+K`)
 - [ ] Drag-and-drop widget layout
 - [ ] Optional tiny backend for system stats (CPU / RAM / disk) and CORS-free pings
-- [ ] More widgets: RSS, weather, crypto/stocks, GitHub activity
-- [ ] Docker image + `docker-compose.yml`
+- [x] More widgets: RSS, weather, crypto, GitHub activity, pomodoro, tasks, notes
+- [x] Docker image + `docker-compose.yml`
 - [ ] Theme editor
 
 ## License

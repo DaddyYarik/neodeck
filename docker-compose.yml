@@ -1,0 +1,12 @@
+services:
+  neodeck:
+    build: .
+    image: neodeck:latest
+    container_name: neodeck
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    # Use your own config without rebuilding the image — drop a
+    # neodeck.config.json next to this file and uncomment:
+    # volumes:
+    #   - ./neodeck.config.json:/usr/share/nginx/html/neodeck.config.json:ro
