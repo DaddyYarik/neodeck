@@ -1,0 +1,25 @@
+{
+  "title": "NeoDeck",
+  "theme": "matrix",
+  "matrixRain": true,
+  "search": {
+    "default": "ddg",
+    "engines": [
+      { "key": "ddg", "name": "DuckDuckGo", "url": "https://duckduckgo.com/?q=%s" },
+      { "key": "gh", "name": "GitHub", "url": "https://github.com/search?q=%s" }
+    ]
+  },
+  "bookmarks": [
+    {
+      "group": "daily",
+      "links": [
+        { "label": "GitHub", "url": "https://github.com" },
+        { "label": "My Site", "url": "https://daddyyarik.github.io" }
+      ]
+    }
+  ],
+  "services": [
+    { "name": "GitHub", "url": "https://github.com" },
+    { "name": "My homelab", "url": "https://example.local" }
+  ]
+}
