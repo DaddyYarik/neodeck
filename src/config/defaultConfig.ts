@@ -79,7 +79,7 @@ export const defaultConfig: NeoDeckConfig = {
   },
   rss: {
     feeds: [{ title: "Hacker News", url: "https://hnrss.org/frontpage" }],
-    proxy: "https://api.allorigins.win/raw?url=",
+    proxy: "https://corsproxy.io/?url=",
     limit: 6,
   },
   todo: true,

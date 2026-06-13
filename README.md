@@ -3,9 +3,9 @@
 > A self-hostable, config-driven **cyberpunk-terminal dashboard** / browser start page.
 > Set it as your new-tab page, point it at your homelab, make it yours — no build step required to customize.
 
-```
-~/neodeck█
-```
+**[🌐 Live demo →](https://daddyyarik.github.io/neodeck/)**
+
+![NeoDeck dashboard](docs/screenshot.png)
 
 NeoDeck is a single static site: drop a `neodeck.config.json` next to it and the
 whole dashboard reshapes itself — no rebuild, no backend. Built with Svelte +
